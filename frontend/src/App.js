@@ -1,27 +1,26 @@
 import './App.css';
-import { Component } from 'react';
+import { useState, useEffect } from 'react';
 
-class App extends Component {
-	state = {
-		message: "If spring backend is running and database is running, then this message should be replaced!"
-	};
-	async componentDidMount() {
-		await this.getHelloWorld();
-	}
-	async getHelloWorld() {
-		const response           = await fetch('/helloworld');
+const App = () => {
+	const [message, setMessage] = useState("If spring backend is running and database is running, then this message should be replaced!")
+
+	const getHelloWorld = async () => {
+		const response = await fetch('/helloworld');
 		const helloWorldResponse = await response.json();
-		this.setState({ message: helloWorldResponse.message });
+		setMessage(helloWorldResponse.message)
 	}
-	render() {
-		return (
-			<div className="App">
-				<p>
-					{this.state.message}
-				</p>
-			</div>
-		);
-	}
+
+	useEffect(() => {
+		getHelloWorld()
+	}, [])
+
+	return (
+		<div className="App">
+			<p>
+				{message}
+			</p>
+		</div>
+	)
 }
 
 export default App;
