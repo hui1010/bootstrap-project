@@ -1,3 +1,60 @@
 .App {
 	text-align: center;
+	height: 100vh;
+}
+
+.rent-container {
+	height: inherit;
+	display: flex;
+	flex-direction: column;
+}
+
+.options {
+	background-color: rgb(220, 200, 245);
+	display: flex;
+	justify-content: space-around;
+}
+
+.car-modal-selector {
+	position: relative;
+	width: 150px;
+}
+
+.drop-down-menu {
+	position: absolute;
+	padding-top: 0;
+	border: 1px gray solid;
+	border-top-width: 0;
+
+}
+
+
+.drop-down-option {
+	padding-left: 15px;
+	padding-right: 15px
+}
+
+.drop-down-option:hover {
+	background-color: #ff0;
+}
+
+
+.selected {
+	border: 1px gray solid;
+	padding: 15px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	width: inherit;
+	display: flex;
+	justify-content: space-between;
+}
+
+
+button {
+	max-height: 45px;
+	min-width: 60PX;
+	border-radius: 12px;
+	padding: 5px;
+	border-width: 0;
+	background-color: azure;
 }
