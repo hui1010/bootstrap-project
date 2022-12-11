@@ -12,12 +12,15 @@ public class RentCar {
     @Id
     String renterName;
 
+    Integer renterAge;
+
     String carModel;
     LocalDate startDate;
     LocalDate endDate;
 
-    public RentCar(String renterName, String carModel, LocalDate startDate, LocalDate endDate) {
+    public RentCar(String renterName, Integer renterAge, String carModel, LocalDate startDate, LocalDate endDate) {
         this.renterName = renterName;
+        this.renterAge = renterAge;
         this.carModel = carModel;
         this.startDate = startDate;
         this.endDate = endDate;
@@ -29,6 +32,14 @@ public class RentCar {
 
     public void setRenterName(String renterName) {
         this.renterName = renterName;
+    }
+
+    public Integer getRenterAge() {
+        return renterAge;
+    }
+
+    public void setRenterAge(Integer renterAge) {
+        this.renterAge = renterAge;
     }
 
     public String getCarModdl() {
