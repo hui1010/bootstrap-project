@@ -1,12 +1,11 @@
 import React, { useState } from 'react'
 
-export function RentView() {
+export const RentView = () => {
     const [selectedCar, setSelectedCar] = useState()
     const [showDropdown, setShowDropdown] = useState(false)
     const [startDate, setStartDate] = useState()
     const [endDate, setEndDate] = useState()
     const [name, setName] = useState()
-
 
     const tempCarpool = [{
         id: 1,
@@ -21,8 +20,6 @@ export function RentView() {
         id: 4,
         model: "Ford Transit", price: 2400
     }]
-
-
 
     const onSubmit = () => {
         //Send data to database
