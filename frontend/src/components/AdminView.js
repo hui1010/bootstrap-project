@@ -1,4 +1,5 @@
 import React from 'react'
+import { NavBar } from './NavBar'
 
 export const AdminView = () => {
 
@@ -7,6 +8,7 @@ export const AdminView = () => {
 
     return (
         <div >
+            <NavBar />
             <p>Rented Cars</p>
             <ul>
                 {

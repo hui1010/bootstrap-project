@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { NavBar } from './NavBar'
 
 export const RentView = () => {
     const [selectedCar, setSelectedCar] = useState()
@@ -32,6 +33,7 @@ export const RentView = () => {
 
     return (
         <div className="rent-container">
+            <NavBar />
             <div>
                 <p>Please enter your name</p>
                 <input type="text" value={name} onChange={e => setName(e.target.value)} />
