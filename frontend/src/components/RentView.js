@@ -7,6 +7,7 @@ export const RentView = () => {
     const [startDate, setStartDate] = useState()
     const [endDate, setEndDate] = useState()
     const [name, setName] = useState()
+    const [age, setAge] = useState(0)
 
     const tempCarpool = [{
         id: 1,
@@ -22,8 +23,41 @@ export const RentView = () => {
         model: "Ford Transit", price: 2400
     }]
 
-    const onSubmit = () => {
-        //Send data to database
+
+    const onSubmit = async () => {
+        if (!name || name.trim() === "") {
+            alert("Name cannot be empty!")
+            return
+        }
+        if (age < 18) {
+            alert("You need to be at least 18 years old to rent a car!")
+            return
+        }
+        console.log('-----------------------------------')
+        console.log(selectedCar)
+        console.log(JSON.stringify({
+            renterName: name,
+            renterAge: parseInt(age),
+            carModel: selectedCar.model,
+            startDate: new Date(),
+            endDate: new Date()
+        }))
+        const res = await fetch('/', {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            },
+            body: JSON.stringify({
+                renterName: name,
+                renterAge: age,
+                carModel: selectedCar.model,
+                startDate: new Date(),
+                endDate: new Date()
+            })
+        })
+        console.log(res)
+
         console.log("Sending data....")
     }
 
@@ -36,7 +70,19 @@ export const RentView = () => {
             <NavBar />
             <div>
                 <p>Please enter your name</p>
-                <input type="text" value={name} onChange={e => setName(e.target.value)} />
+                <input type="text" value={name} onChange={e => {
+                    if (Number(e.target.value)) {
+                        console.log(e.nativeEvent.data)
+                        return
+                    } else {
+                        setName(e.target.value)
+                    }
+
+                }} />
+            </div>
+            <div>
+                <p>Please enter your age</p>
+                <input type="number" value={age} onChange={e => setAge(e.target.value)} />
             </div>
             <div className="options">
                 <div>

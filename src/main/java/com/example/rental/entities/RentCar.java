@@ -2,23 +2,36 @@ package com.example.rental.entities;
 
 import java.time.LocalDate;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "RentCar")
+@Table(name = "rentCar")
 public class RentCar {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+
+    @Column(nullable = false)
     String renterName;
 
-    Integer renterAge;
+    @Column(nullable = false)
+    int renterAge;
 
+    @Column(nullable = false)
     String carModel;
+
+    @Column(nullable = false)
     LocalDate startDate;
+
+    @Column(nullable = false)
     LocalDate endDate;
 
-    public RentCar(String renterName, Integer renterAge, String carModel, LocalDate startDate, LocalDate endDate) {
+    public RentCar(String renterName, int renterAge, String carModel, LocalDate startDate, LocalDate endDate) {
         this.renterName = renterName;
         this.renterAge = renterAge;
         this.carModel = carModel;
@@ -34,15 +47,15 @@ public class RentCar {
         this.renterName = renterName;
     }
 
-    public Integer getRenterAge() {
+    public int getRenterAge() {
         return renterAge;
     }
 
-    public void setRenterAge(Integer renterAge) {
+    public void setRenterAge(int renterAge) {
         this.renterAge = renterAge;
     }
 
-    public String getCarModdl() {
+    public String getCarModel() {
         return carModel;
     }
 
