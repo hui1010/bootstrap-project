@@ -8,6 +8,8 @@ export const RentView = () => {
     const [endDate, setEndDate] = useState(new Date())
     const [name, setName] = useState("")
     const [age, setAge] = useState(0)
+    const [summary, setSummary] = useState("")
+
 
     const tempCarpool = [{
         id: 1,
@@ -34,14 +36,9 @@ export const RentView = () => {
             return
         }
 
-        console.log(JSON.stringify({
-            renterName: name,
-            renterAge: parseInt(age),
-            carModel: selectedCar.model,
-            startDate: new Date(),
-            endDate: new Date()
-        }))
-        const res = await fetch('/', {
+        const rentDays = (new Date(endDate) - new Date(startDate)) / (1000 * 60 * 60 * 24) + 1
+
+        await fetch('/', {
             method: "POST",
             body: {
                 renterName: name,
@@ -50,14 +47,20 @@ export const RentView = () => {
                 startDate: new Date(startDate),
                 endDate: new Date(endDate)
             }
+        }).then(res => {
+            setSummary(`Hi ${name}, the cost for you to rent ${selectedCar.model} from ${startDate} to ${endDate} is ${selectedCar.price * rentDays} kr`)
+            console.log("sent")
         })
-        console.log(res)
+            .catch(e => console.log(e))
 
-        console.log("Sending data....")
     }
 
     const onReset = () => {
+        setName("")
+        setAge(0)
         setSelectedCar()
+        setStartDate(new Date())
+        setEndDate(new Date())
     }
 
     return (
@@ -156,11 +159,7 @@ export const RentView = () => {
 
             <div className="summary">
                 <p>Summary</p>
-                <p>total cost</p>
-                {selectedCar && <p>
-                    {selectedCar.price * 3}
-                </p>}
-                <p>{name}</p>
+                <p>{summary}</p>
             </div>
         </div>
     )
