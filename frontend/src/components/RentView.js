@@ -7,7 +7,7 @@ export const RentView = () => {
     const [startDate, setStartDate] = useState(new Date())
     const [endDate, setEndDate] = useState(new Date())
     const [name, setName] = useState("")
-    const [age, setAge] = useState()
+    const [age, setAge] = useState(0)
 
     const tempCarpool = [{
         id: 1,
@@ -47,8 +47,8 @@ export const RentView = () => {
                 renterName: name,
                 renterAge: age,
                 carModel: selectedCar.model,
-                startDate: new Date(),
-                endDate: new Date()
+                startDate: new Date(startDate),
+                endDate: new Date(endDate)
             }
         })
         console.log(res)
@@ -77,7 +77,14 @@ export const RentView = () => {
             </div>
             <div>
                 <p>Please enter your age</p>
-                <input type="number" value={age} onChange={e => setAge(e.target.value)} />
+                <input type="number" value={age}
+                    onFocus={() => {
+                        if (age === 0) setAge("")
+                    }}
+                    onChange={e => {
+                        if (e.target.value <= 0) return
+                        setAge(e.target.value)
+                    }} />
             </div>
             <div className="options">
                 <div>
