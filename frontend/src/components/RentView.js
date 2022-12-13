@@ -4,10 +4,10 @@ import { NavBar } from './NavBar'
 export const RentView = () => {
     const [selectedCar, setSelectedCar] = useState()
     const [showDropdown, setShowDropdown] = useState(false)
-    const [startDate, setStartDate] = useState()
-    const [endDate, setEndDate] = useState()
-    const [name, setName] = useState()
-    const [age, setAge] = useState(0)
+    const [startDate, setStartDate] = useState(new Date())
+    const [endDate, setEndDate] = useState(new Date())
+    const [name, setName] = useState("")
+    const [age, setAge] = useState()
 
     const tempCarpool = [{
         id: 1,
@@ -33,8 +33,7 @@ export const RentView = () => {
             alert("You need to be at least 18 years old to rent a car!")
             return
         }
-        console.log('-----------------------------------')
-        console.log(selectedCar)
+
         console.log(JSON.stringify({
             renterName: name,
             renterAge: parseInt(age),
@@ -44,17 +43,13 @@ export const RentView = () => {
         }))
         const res = await fetch('/', {
             method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "Accept": "application/json"
-            },
-            body: JSON.stringify({
+            body: {
                 renterName: name,
                 renterAge: age,
                 carModel: selectedCar.model,
                 startDate: new Date(),
                 endDate: new Date()
-            })
+            }
         })
         console.log(res)
 
@@ -115,12 +110,36 @@ export const RentView = () => {
                 <div>
                     <p >Start date</p>
                     <div>
-                        <input type="date" onSelect={(e) => console.log(e.target.value)} />
+                        <input type="date"
+                            value={startDate}
+                            min={new Date()}
+                            onChange={(e) => {
+                                {
+                                    const now = new Date().toISOString().split("T")[0]
+                                    if (e.target.value < now) {
+                                        alert("You can not select a date earlier than today")
+                                    } else if (e.target.value > endDate) {
+                                        alert("Start date cannot be later than end date")
+                                    }
+                                    else {
+                                        setStartDate(e.target.value)
+                                    }
+                                }
+                            }} />
                     </div>
                 </div>
                 <div>
                     <p>End date</p>
-                    <input type="date" onSelect={(e) => console.log(e.target.value)} />
+                    <input type="date"
+                        value={endDate}
+                        onChange={(e) => {
+                            const start = new Date(startDate).toISOString().split("T")[0]
+                            if (e.target.value < start) {
+                                alert("End date must be later than start date")
+                            } else {
+                                setEndDate(e.target.value)
+                            }
+                        }} />
 
                 </div>
 
