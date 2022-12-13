@@ -7,7 +7,7 @@ export const RentView = () => {
     const [startDate, setStartDate] = useState(new Date())
     const [endDate, setEndDate] = useState(new Date())
     const [name, setName] = useState("")
-    const [age, setAge] = useState(0)
+    const [age, setAge] = useState("")
     const [summary, setSummary] = useState("")
 
 
@@ -56,66 +56,63 @@ export const RentView = () => {
 
     const onReset = () => {
         setName("")
-        setAge(0)
+        setAge("")
         setSelectedCar()
         setStartDate(new Date())
         setEndDate(new Date())
     }
 
     return (
-        <div className="rent-container">
+        <div className="rent-container" onClick={() => { if (showDropdown) setShowDropdown(false) }}>
             <NavBar />
-            <div>
-                <p>Please enter your name</p>
-                <input type="text" value={name} onChange={e => {
-                    if (Number(e.target.value)) {
-                        console.log(e.nativeEvent.data)
-                        return
-                    } else {
-                        setName(e.target.value)
-                    }
-                }} />
-            </div>
-            <div>
-                <p>Please enter your age</p>
-                <input type="number" value={age}
-                    onFocus={() => {
-                        if (age === 0) setAge("")
-                    }}
-                    onChange={e => {
-                        if (e.target.value <= 0) return
-                        setAge(e.target.value)
-                    }} />
-            </div>
-            <div className="options">
-                <div>
-                    <p>Car Modal</p>
-                    <div className='car-modal-selector' >
-                        <div className="selected" onClick={() => setShowDropdown(!showDropdown)}>
-                            <div>
-                                {selectedCar ? selectedCar.model : "Selecting..."}
-                            </div>
-                            <div>
-                                &#x25BE;
-                            </div>
-                        </div>
-
-                        {showDropdown && <div className="drop-down-menu">{tempCarpool.map((e) => (
-                            <div key={e.id} className="drop-down-option" onClick={
-                                () => {
-                                    setSelectedCar(e)
-                                    setShowDropdown(false)
-                                }
-                            }>
-                                {e.model}
-                            </div>
-                        ))}
-                        </div>}
+            <div className="rent-main-body">
+                <div className="inputs">
+                    <div className="input-wrapper">
+                        <p className="input-label">Please enter your name</p>
+                        <input type="text" value={name} onChange={e => {
+                            if (Number(e.target.value)) {
+                                console.log(e.nativeEvent.data)
+                                return
+                            } else {
+                                setName(e.target.value)
+                            }
+                        }} />
                     </div>
-                </div>
-                <div>
-                    <p >Start date</p>
-                    <div>
+                    <div className="input-wrapper">
+                        <p className="input-label">Please enter your age</p>
+                        <input type="number" value={age}
+                            onChange={e => {
+                                if (e.target.value <= 0) return
+                                setAge(e.target.value)
+                            }} />
+                    </div>
+
+                    <div className="input-wrapper">
+                        <p className="input-label">Car Modal</p>
+                        <div className='car-mod3l-selector' >
+
+                            <div className="select-input"
+                                onClick={() => setShowDropdown(!showDropdown)}>
+                                {selectedCar ? selectedCar.model : "Selecting..."}
+                                &#x25BE;
+
+                            </div>
+
+                            {showDropdown && <div className="drop-down-menu">{tempCarpool.map((e) => (
+                                <div key={e.id} className="drop-down-option" onClick={
+                                    () => {
+                                        setSelectedCar(e)
+                                        setShowDropdown(false)
+                                    }
+                                }>
+                                    {e.model}
+                                </div>
+                            ))}
+                            </div>}
+                        </div>
+                    </div>
+                    <div className="input-wrapper">
+                        <p className="input-label">Start date</p>
                         <input type="date"
                             value={startDate}
                             min={new Date()}
@@ -134,30 +131,31 @@ export const RentView = () => {
                             }}
                         />
                     </div>
+                    <div className="input-wrapper">
+                        <p className="input-label">End date</p>
+                        <input type="date"
+                            value={endDate}
+                            onChange={(e) => {
+                                const start = new Date(startDate).toISOString().split("T")[0]
+                                if (e.target.value < start) {
+                                    alert("End date must be later than start date")
+                                } else {
+                                    setEndDate(e.target.value)
+                                }
+                            }}
+                        />
+                    </div>
                 </div>
-                <div>
-                    <p>End date</p>
-                    <input type="date"
-                        value={endDate}
-                        onChange={(e) => {
-                            const start = new Date(startDate).toISOString().split("T")[0]
-                            if (e.target.value < start) {
-                                alert("End date must be later than start date")
-                            } else {
-                                setEndDate(e.target.value)
-                            }
-                        }}
-                    />
 
+                <div className="buttons">
+                    <button className='btn' onClick={onReset}>Reset</button>
+                    <button className='btn' onClick={onSubmit}>Submit</button>
                 </div>
 
-                <button className='btn' onClick={onReset}>Reset</button>
-                <button className='btn' onClick={onSubmit}>Submit</button>
-            </div>
-
-            <div className="summary">
-                <p>Summary</p>
-                <p>{summary}</p>
+                <div className="summary">
+                    {!!summary && <h2>Summary</h2>}
+                    <p>{summary}</p>
+                </div>
             </div>
         </div>
     )

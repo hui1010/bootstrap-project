@@ -4,19 +4,14 @@ import { Outlet, Link } from "react-router-dom";
 export const NavBar = () => {
     return (
         <>
-            <nav>
-                <ul>
-                    {/* <li>
-                        <Link to="/">Home</Link>
-                    </li> */}
-                    <li>
-                        <Link to="/rent">Rent</Link>
-                    </li>
-                    <li>
-                        <Link to="/admin">Admin</Link>
-                    </li>
-                </ul>
-            </nav>
+            <ul className="nav-bar">
+                <li className='nav-bar-item'>
+                    <Link to="/rent">Rent</Link>
+                </li>
+                <li className='nav-bar-item'>
+                    <Link to="/admin">Admin</Link>
+                </li>
+            </ul>
 
             <Outlet />
         </>
