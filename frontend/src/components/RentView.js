@@ -51,8 +51,7 @@ export const RentView = () => {
             setSummary(`Hi ${name}, the cost for you to rent ${selectedCar.model} from ${startDate} to ${endDate} is ${selectedCar.price * rentDays} kr`)
             console.log("sent")
         })
-            .catch(e => console.log(e))
-
+            .catch(e => console.error(e))
     }
 
     const onReset = () => {
@@ -75,7 +74,6 @@ export const RentView = () => {
                     } else {
                         setName(e.target.value)
                     }
-
                 }} />
             </div>
             <div>
@@ -95,7 +93,6 @@ export const RentView = () => {
                     <div className='car-modal-selector' >
                         <div className="selected" onClick={() => setShowDropdown(!showDropdown)}>
                             <div>
-
                                 {selectedCar ? selectedCar.model : "Selecting..."}
                             </div>
                             <div>
@@ -110,12 +107,11 @@ export const RentView = () => {
                                     setShowDropdown(false)
                                 }
                             }>
-
                                 {e.model}
-
                             </div>
                         ))}
-                        </div>}</div>
+                        </div>}
+                    </div>
                 </div>
                 <div>
                     <p >Start date</p>
@@ -135,7 +131,8 @@ export const RentView = () => {
                                         setStartDate(e.target.value)
                                     }
                                 }
-                            }} />
+                            }}
+                        />
                     </div>
                 </div>
                 <div>
@@ -149,7 +146,8 @@ export const RentView = () => {
                             } else {
                                 setEndDate(e.target.value)
                             }
-                        }} />
+                        }}
+                    />
 
                 </div>
 
