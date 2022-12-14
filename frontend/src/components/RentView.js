@@ -70,9 +70,8 @@ export const RentView = () => {
                     <div className="input-wrapper">
                         <p className="input-label">Please enter your name</p>
                         <input type="text" value={name} onChange={e => {
-                            if (Number(e.target.value)) {
-                                console.log(e.nativeEvent.data)
-                                return
+                            if (Number(e.nativeEvent.data)) {
+                                alert("Number is not allowed in name")
                             } else {
                                 setName(e.target.value)
                             }
