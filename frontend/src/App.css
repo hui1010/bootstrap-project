@@ -1,6 +1,7 @@
 html {
 	padding: 50px;
 	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	min-width: 650px;
 }
 
 ul {
@@ -23,7 +24,19 @@ button {
 }
 
 input {
-	padding: 0
+	padding: 0;
+	outline: none;
+	border: 1px solid black;
+	box-sizing: border-box;
+}
+
+input:focus {
+	border-width: 2px;
+}
+
+
+button:hover {
+	cursor: pointer;
 }
 
 .nav-bar,
@@ -73,7 +86,8 @@ input {
 
 .input-wrapper input {
 	width: 150px;
-	height: 25px;
+	height: 30px;
+	padding: 5px
 }
 
 .car-model-selector {

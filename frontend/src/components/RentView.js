@@ -149,8 +149,8 @@ export const RentView = () => {
                 </div>
 
                 <div className="buttons">
-                    <button className='btn' onClick={onReset}>Reset</button>
-                    <button className='btn' onClick={onSubmit}>Submit</button>
+                    <button className='btn reset' onClick={onReset}>Reset</button>
+                    <button className='btn submit' onClick={onSubmit}>Submit</button>
                 </div>
 
                 <div className="summary">
