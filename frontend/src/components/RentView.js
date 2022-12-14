@@ -89,13 +89,15 @@ export const RentView = () => {
 
                     <div className="input-wrapper">
                         <p className="input-label">Car Modal</p>
-                        <div className='car-mod3l-selector' >
-
-                            <div className="select-input"
+                        <div className='car-model-selector' >
+                            <div className={`select-input ${showDropdown && `select-input-focus`}`}
                                 onClick={() => setShowDropdown(!showDropdown)}>
-                                {selectedCar ? selectedCar.model : "Selecting..."}
-                                &#x25BE;
-
+                                <>
+                                    {selectedCar ? selectedCar.model : "Selecting..."}
+                                </>
+                                <div>
+                                    &#x25BE;
+                                </div>
                             </div>
 
                             {showDropdown && <div className="drop-down-menu">{tempCarpool.map((e) => (

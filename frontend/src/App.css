@@ -22,6 +22,9 @@ button {
 	border-width: 0;
 }
 
+input {
+	padding: 0
+}
 
 .nav-bar,
 .buttons {
@@ -68,38 +71,44 @@ button {
 	margin-right: 15px;
 }
 
+.input-wrapper input {
+	width: 150px;
+	height: 25px;
+}
+
 .car-model-selector {
 	position: relative;
-	width: 150px;
 }
 
 .drop-down-menu {
 	position: absolute;
-	padding-top: 0;
-	border: 1px gray solid;
+	padding: 5px;
+	border: 1px black solid;
 	border-top-width: 0;
-	width: "100%";
+	width: 150px;
+	box-sizing: border-box;
+	background-color: #fff;
 }
 
-.drop-down-option {
-	/* padding-left: 15px;
-	padding-right: 15px */
-}
+.drop-down-option {}
 
 .drop-down-option:hover {
-	background-color: #ff0;
+	background-color: aquamarine;
 }
 
 .select-input {
-	border: 1px gray solid;
-	padding: 15px;
-	padding-top: 5px;
-	padding-bottom: 5px;
-	width: inherit;
+	border: 1px black solid;
+	padding: 5px;
+	width: 150px;
+	height: 30px;
 	display: flex;
 	justify-content: space-between;
+	box-sizing: border-box;
 }
 
+.select-input-focus {
+	border-width: 2px;
+}
 
 .buttons {
 	margin-top: 400px;
