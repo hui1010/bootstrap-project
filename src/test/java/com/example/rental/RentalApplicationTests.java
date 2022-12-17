@@ -9,16 +9,20 @@ import org.springframework.test.context.TestPropertySource;
 
 import org.springframework.test.web.servlet.MockMvc;
 
+import com.example.rental.entities.RentCar;
+
 import static org.hamcrest.Matchers.containsString;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import java.time.LocalDate;
+
 @SpringBootTest
 @AutoConfigureMockMvc
-@TestPropertySource(
-	locations = "classpath:application-integrationtest.properties")
+@TestPropertySource(locations = "classpath:application-integrationtest.properties")
 class RentalApplicationTests {
 
 	@Autowired
@@ -27,9 +31,28 @@ class RentalApplicationTests {
 	@Test
 	void shouldReturnHelloWorldFromDatabase() throws Exception {
 		this.mvc.perform(get("/helloworld"))
-			.andDo(print())
-			.andExpect(status().isOk())
-			.andExpect(content().string(containsString("Hello world!")));
+				.andDo(print())
+				.andExpect(status().isOk())
+				.andExpect(content().string(containsString("Hello world!")));
 	}
 
+	@Test
+	void shouldInsertOneRowToDatabase() throws Exception {
+		RentCar rentCar = new RentCar("Huiyi", 28, "Volv", LocalDate.of(2023, 12, 12), LocalDate.of(2023, 12, 24));
+		this.mvc.perform(post("/", rentCar))
+				.andDo(print())
+				.andExpect(status().isOk());
+
+	}
+
+	@Test
+	void shouldShowAllDataInDatabase() throws Exception {
+		RentCar rentCar1 = new RentCar("Huiyi", 28, "Volv", LocalDate.of(2023, 12, 12), LocalDate.of(2023, 12, 24));
+		RentCar rentCar2 = new RentCar("Bowser", 28, "Volv", LocalDate.of(2023, 12, 12), LocalDate.of(2023, 12, 24));
+		RentCar rentCar3 = new RentCar("Tuskar", 28, "Volv", LocalDate.of(2023, 12, 12), LocalDate.of(2023, 12, 24));
+		this.mvc.perform(get("/"))
+				.andDo(print())
+				.andExpect(status().isOk());
+
+	}
 }

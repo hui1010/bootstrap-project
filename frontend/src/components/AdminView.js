@@ -9,10 +9,13 @@ export const AdminView = () => {
     const [rentedCars, setRentedCars] = useState([])
 
     const getAllRentedCars = async () => {
-        const res = await fetch('/');
+        console.log('---------------')
+        const res = await fetch('/admin');
+        console.log("-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-")
         console.log(res);
         const json = await res.json();
-        setRentedCars(json);
+        setRentedCars(res);
+
     }
 
 
@@ -23,14 +26,15 @@ export const AdminView = () => {
         }, []
     )
 
-
+    console.log("------------///////////////////////------------")
+    console.log(rentedCars)
     return (
         <div >
             <NavBar />
             <p>Rented Cars</p>
             <ul>
                 {
-                    rentedCars.map(c => (
+                    rentedCars.length > 0 && rentedCars.map(c => (
                         <li >{
                             c.renterName
                         }</li>

@@ -5,6 +5,6 @@ import org.springframework.data.jpa.repository.Query;
 
 public interface HelloWorldRepository extends JpaRepository<HelloWorld, Long> {
 
-	@Query(value = "SELECT 'Hallå Huiyi!' message", nativeQuery = true)
+	@Query(value = "SELECT 'Hello world!' message", nativeQuery = true)
 	HelloWorld getHelloWorldFromDatabase();
 }

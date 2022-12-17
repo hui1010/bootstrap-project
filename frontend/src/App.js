@@ -17,6 +17,13 @@ const App = () => {
 		getHelloWorld()
 	}, [])
 
+	// return (
+	// 	<div className="App">
+	// 		<p>
+	// 			{message}
+	// 		</p>
+	// 	</div>
+	// );
 	return (
 		<BrowserRouter>
 			<Routes>

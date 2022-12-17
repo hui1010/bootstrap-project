@@ -36,20 +36,28 @@ export const RentView = () => {
             return
         }
 
+        let data = {
+            renterName: name,
+            renterAge: age,
+            carModel: selectedCar.model,
+            startDate: new Date(startDate),
+            endDate: new Date(endDate)
+        }
+
         const rentDays = (new Date(endDate) - new Date(startDate)) / (1000 * 60 * 60 * 24) + 1
 
-        await fetch('/', {
+        await fetch('/rent', {
             method: "POST",
-            body: {
-                renterName: name,
-                renterAge: age,
-                carModel: selectedCar.model,
-                startDate: new Date(startDate),
-                endDate: new Date(endDate)
-            }
-        }).then(res => {
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8'
+            },
+            body: JSON.stringify(data)
+        }).then((res) => {
             setSummary(`Hi ${name}, the cost for you to rent ${selectedCar.model} from ${startDate} to ${endDate} is ${selectedCar.price * rentDays} kr`)
             console.log("sent")
+            console.log(res)
+            console.log('-------------------------------------------f')
+
         })
             .catch(e => console.error(e))
     }

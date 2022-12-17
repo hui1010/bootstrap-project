@@ -11,7 +11,7 @@ public class HelloWorld {
 	String message;
 
 	public HelloWorld() {
-		message = "Hallå Huiyi!";
+		message = "Hello World!";
 	}
 
 	public String getMessage() {

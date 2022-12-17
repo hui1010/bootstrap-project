@@ -39,6 +39,10 @@ public class RentCar {
         this.endDate = endDate;
     }
 
+    public RentCar() {
+
+    }
+
     public String getRenterName() {
         return renterName;
     }
