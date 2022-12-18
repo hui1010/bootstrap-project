@@ -13,7 +13,7 @@ import java.util.Optional;
 public interface RentCarRepository extends JpaRepository<RentCar, Integer> {
 
     /*
-    @Query(value = "INSERT INTO public.rent_car ( renter_name, renter_age, car_model, start_date, end_date) VALUES (?1, ?2, ?3, ?4, ?5);", nativeQuery = true)
+    @Query(value = "INSERT INTO public.rent_car ( renter_name, renter_age, car_model, start_date, end_date, cost) VALUES (?1, ?2, ?3, ?4, ?5, ?6);", nativeQuery = true)
     RentCar saveRentCar(RentCar rentCar);
     */
 
