@@ -1,7 +1,9 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { NavBar } from './NavBar'
 
 export const RentView = () => {
+    const [cars, setCars] = useState([])
+
     const [selectedCar, setSelectedCar] = useState()
     const [showDropdown, setShowDropdown] = useState(false)
     const [startDate, setStartDate] = useState(new Date())
@@ -24,6 +26,17 @@ export const RentView = () => {
         id: 4,
         model: "Ford Transit", price: 2400
     }]
+
+    const getAllCars = async () => {
+        const res = await fetch("/rent")
+        const json = await res.json()
+        setCars(json)
+    }
+
+    useEffect(() => {
+        getAllCars()
+        console.log(cars)
+    }, [])
 
 
     const onSubmit = async () => {

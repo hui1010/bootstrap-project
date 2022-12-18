@@ -4,8 +4,7 @@ import { NavBar } from './NavBar'
 
 export const AdminView = () => {
 
-    // Get data from backend
-    // const rentedCars = [{ name: "Tom" }, { name: "Jerry" }, { name: "Huiyi" }]
+
     const [rentedCars, setRentedCars] = useState([])
 
     const getAllRentedCars = async () => {
