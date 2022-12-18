@@ -6,8 +6,8 @@ export const RentView = () => {
 
     const [selectedCar, setSelectedCar] = useState()
     const [showDropdown, setShowDropdown] = useState(false)
-    const [startDate, setStartDate] = useState(new Date())
-    const [endDate, setEndDate] = useState(new Date())
+    const [startDate, setStartDate] = useState(new Date().toISOString().split("T")[0])
+    const [endDate, setEndDate] = useState(new Date().toISOString().split("T")[0])
     const [name, setName] = useState("")
     const [age, setAge] = useState("")
     const [summary, setSummary] = useState("")
@@ -17,7 +17,6 @@ export const RentView = () => {
     const getAllCars = async () => {
         const res = await fetch("/rent")
         const json = await res.json()
-
         setCars(json)
     }
 
@@ -31,6 +30,7 @@ export const RentView = () => {
             alert("Button is not clickable right now!")
             return
         }
+
         if (!name || name.trim() === "") {
             alert("Name cannot be empty!")
             return
@@ -55,7 +55,6 @@ export const RentView = () => {
             alert("Please select the end date!")
             return
         }
-
 
         if (age < 18) {
             alert("You need to be at least 18 years old to rent a car!")
@@ -88,10 +87,9 @@ export const RentView = () => {
                 onReset()
             }
 
+        }).catch(e => {
+            console.error(e)
         })
-            .catch(e => {
-                console.error(e)
-            })
             .finally(() => setDisableSubmit(true))
     }
 
@@ -99,8 +97,8 @@ export const RentView = () => {
         setName("")
         setAge("")
         setSelectedCar()
-        setStartDate(new Date())
-        setEndDate(new Date())
+        setStartDate(new Date().toISOString().split("T")[0])
+        setEndDate(new Date().toISOString().split("T")[0])
         setDisableSubmit(true)
         setSummary()
     }
