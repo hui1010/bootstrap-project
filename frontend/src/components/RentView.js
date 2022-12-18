@@ -13,29 +13,15 @@ export const RentView = () => {
     const [summary, setSummary] = useState("")
 
 
-    const tempCarpool = [{
-        id: 1,
-        model: "Volvo S60", price: 1500
-    }, {
-        id: 2,
-        model: "Volkswagen Golf", price: 1333
-    }, {
-        id: 3,
-        model: "Ford Mustang", price: 3000
-    }, {
-        id: 4,
-        model: "Ford Transit", price: 2400
-    }]
-
     const getAllCars = async () => {
         const res = await fetch("/rent")
         const json = await res.json()
+
         setCars(json)
     }
 
     useEffect(() => {
         getAllCars()
-        console.log(cars)
     }, [])
 
 
@@ -80,6 +66,8 @@ export const RentView = () => {
         setEndDate(new Date())
     }
 
+    console.log(cars)
+
     return (
         <div className="rent-container" onClick={() => { if (showDropdown) setShowDropdown(false) }}>
             <NavBar />
@@ -105,7 +93,7 @@ export const RentView = () => {
                     </div>
 
                     <div className="input-wrapper">
-                        <p className="input-label">Car Modal</p>
+                        <p className="input-label">Car Model</p>
                         <div className='car-model-selector' >
                             <div className={`select-input ${showDropdown && `select-input-focus`}`}
                                 onClick={() => setShowDropdown(!showDropdown)}>
@@ -117,7 +105,7 @@ export const RentView = () => {
                                 </div>
                             </div>
 
-                            {showDropdown && <div className="drop-down-menu">{tempCarpool.map((e) => (
+                            {showDropdown && <div className="drop-down-menu">{cars.map((e) => (
                                 <div key={e.id} className="drop-down-option" onClick={
                                     () => {
                                         setSelectedCar(e)

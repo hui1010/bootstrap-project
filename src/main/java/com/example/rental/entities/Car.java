@@ -17,21 +17,21 @@ public class Car {
     private Integer id;
 
     @Column(nullable = false)
-    String modal;
+    String model;
     @Column(nullable = false)
     Integer price;
 
     public Car() {
     }
 
-    public Car(Integer id, String modal, Integer price) {
+    public Car(Integer id, String model, Integer price) {
         this.id = id;
-        this.modal = modal;
+        this.model = model;
         this.price = price;
     }
 
-    public Car(String modal, Integer price) {
-        this.modal = modal;
+    public Car(String model, Integer price) {
+        this.model = model;
         this.price = price;
     }
 
@@ -39,12 +39,12 @@ public class Car {
         return id;
     }
 
-    public String getModal() {
-        return modal;
+    public String getModel() {
+        return model;
     }
 
-    public void setModal(String modal) {
-        this.modal = modal;
+    public void setModel(String model) {
+        this.model = model;
     }
 
     public Integer getPrice() {
@@ -59,19 +59,19 @@ public class Car {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Car car)) return false;
-        return getId().equals(car.getId()) && getModal().equals(car.getModal()) && getPrice().equals(car.getPrice());
+        return getId().equals(car.getId()) && getModel().equals(car.getModel()) && getPrice().equals(car.getPrice());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getModal(), getPrice());
+        return Objects.hash(getId(), getModel(), getPrice());
     }
 
     @Override
     public String toString() {
         return "Car{" +
                 "id=" + id +
-                ", modal='" + modal + '\'' +
+                ", model='" + model + '\'' +
                 ", price=" + price +
                 '}';
     }
