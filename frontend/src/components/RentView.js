@@ -57,7 +57,6 @@ export const RentView = () => {
         }
 
 
-
         if (age < 18) {
             alert("You need to be at least 18 years old to rent a car!")
             return
@@ -81,10 +80,18 @@ export const RentView = () => {
             },
             body: JSON.stringify(data)
         }).then((res) => {
-            setSummary(`Hi ${name}, the cost for you to rent ${selectedCar.model} from ${startDate} to ${endDate} is ${selectedCar.price * rentDays} kr`)
+            if (res.ok) {
+                setSummary(`Hi ${name}, the cost for you to rent ${selectedCar.model} from ${startDate} to ${endDate} is ${selectedCar.price * rentDays} kr`)
+            } else {
+                // This is not perfect, need backend to throw better http error code and message
+                alert("This car may have been rented during the date you have selected!")
+                onReset()
+            }
 
         })
-            .catch(e => console.error(e))
+            .catch(e => {
+                console.error(e)
+            })
             .finally(() => setDisableSubmit(true))
     }
 
@@ -95,6 +102,7 @@ export const RentView = () => {
         setStartDate(new Date())
         setEndDate(new Date())
         setDisableSubmit(true)
+        setSummary()
     }
 
     return (

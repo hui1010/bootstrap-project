@@ -26,17 +26,7 @@ public class RentCarController {
     }
 
     @PostMapping
-    public  Optional<RentCar> saveRentCar(@RequestBody RentCar rentCar) {
-/*
-        System.out.println(rentCar);
-        System.out.println(rentCar.getCarModel());
-        Optional<RentCar> found = rentCarService.getRentCarByModel(rentCar.getCarModel());
-
-        if(found.isPresent() && found.get().getEndDate().isBefore(rentCar.getStartDate()) ) {
-            throw new Error("This car is already rented");
-        }
-
- */
+    public  RentCar saveRentCar(@RequestBody RentCar rentCar) {
         return  rentCarService.saveRentCar(rentCar) ;
     }
 

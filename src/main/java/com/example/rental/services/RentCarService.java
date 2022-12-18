@@ -19,22 +19,16 @@ public class RentCarService {
         this.rentCarRepository = rentCarRepository;
     }
 
-    public Optional<RentCar>  saveRentCar(RentCar rentCar) {
-      //  return rentCarRepository.saveRentCar(rentCar);
-        Optional<RentCar> found = rentCarRepository.getRentCarByModel(rentCar.getCarModel());
+    public RentCar saveRentCar(RentCar rentCar) {
+
+     Optional<RentCar> found = rentCarRepository.getRentCarByModel(rentCar.getCarModel());
         if(found.isPresent() && found.get().getEndDate().isBefore(rentCar.getStartDate()))
-            return Optional.of(null);
-        return Optional.of(rentCarRepository.save(rentCar));
+         throw new IllegalStateException("This car is already rented");
+
+        return rentCarRepository.save(rentCar);
     }
 
     public List<RentCar> getAllRentCars() {
         return rentCarRepository.getAllRentCars();
     }
-
-
-    public Optional<RentCar>  getRentCarByModel (String carModel) {
-        return rentCarRepository.getRentCarByModel(carModel);
-    }
-
-
 }
