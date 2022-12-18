@@ -11,6 +11,7 @@ export const RentView = () => {
     const [name, setName] = useState("")
     const [age, setAge] = useState("")
     const [summary, setSummary] = useState("")
+    const [disableSubmit, setDisableSubmit] = useState(true)
 
 
     const getAllCars = async () => {
@@ -26,10 +27,37 @@ export const RentView = () => {
 
 
     const onSubmit = async () => {
+        if (disableSubmit) {
+            alert("Button is not clickable right now!")
+            return
+        }
         if (!name || name.trim() === "") {
             alert("Name cannot be empty!")
             return
         }
+
+        if (!age) {
+            alert("Age cannot be empty!")
+            return
+        }
+
+        if (!selectedCar) {
+            alert("You must select a car!")
+            return
+        }
+
+        if (!startDate) {
+            alert("Please select the start date!")
+            return
+        }
+
+        if (!endDate) {
+            alert("Please select the end date!")
+            return
+        }
+
+
+
         if (age < 18) {
             alert("You need to be at least 18 years old to rent a car!")
             return
@@ -57,6 +85,7 @@ export const RentView = () => {
 
         })
             .catch(e => console.error(e))
+            .finally(() => setDisableSubmit(true))
     }
 
     const onReset = () => {
@@ -65,6 +94,7 @@ export const RentView = () => {
         setSelectedCar()
         setStartDate(new Date())
         setEndDate(new Date())
+        setDisableSubmit(true)
     }
 
     return (
@@ -75,6 +105,7 @@ export const RentView = () => {
                     <div className="input-wrapper">
                         <p className="input-label">Please enter your name</p>
                         <input type="text" value={name} onChange={e => {
+                            setDisableSubmit(false)
                             if (Number(e.nativeEvent.data)) {
                                 alert("Number is not allowed in name")
                             } else {
@@ -86,6 +117,7 @@ export const RentView = () => {
                         <p className="input-label">Please enter your age</p>
                         <input type="number" value={age}
                             onChange={e => {
+                                setDisableSubmit(false)
                                 if (e.target.value <= 0) return
                                 setAge(e.target.value)
                             }} />
@@ -107,6 +139,7 @@ export const RentView = () => {
                             {showDropdown && <div className="drop-down-menu">{cars.map((e) => (
                                 <div key={e.id} className="drop-down-option" onClick={
                                     () => {
+                                        setDisableSubmit(false)
                                         setSelectedCar(e)
                                         setShowDropdown(false)
                                     }
@@ -131,6 +164,8 @@ export const RentView = () => {
                                         alert("Start date cannot be later than end date")
                                     }
                                     else {
+                                        setDisableSubmit(false)
+
                                         setStartDate(e.target.value)
                                     }
                                 }
@@ -146,6 +181,8 @@ export const RentView = () => {
                                 if (e.target.value < start) {
                                     alert("End date must be later than start date")
                                 } else {
+                                    setDisableSubmit(false)
+
                                     setEndDate(e.target.value)
                                 }
                             }}
@@ -155,7 +192,7 @@ export const RentView = () => {
 
                 <div className="buttons">
                     <button className='btn reset' onClick={onReset}>Reset</button>
-                    <button className='btn submit' onClick={onSubmit}>Submit</button>
+                    <button className={`btn submit ${disableSubmit && `disabled`}`} onClick={onSubmit}>Submit</button>
                 </div>
 
                 <div className="summary">
@@ -163,6 +200,6 @@ export const RentView = () => {
                     <p>{summary}</p>
                 </div>
             </div>
-        </div>
+        </div >
     )
 }

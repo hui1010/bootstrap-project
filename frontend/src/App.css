@@ -127,3 +127,7 @@ button:hover {
 .buttons {
 	margin-top: 400px;
 }
+
+.disabled {
+	background-color: rgba(119, 155, 141, 0.296) !important;
+}
