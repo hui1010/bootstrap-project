@@ -104,8 +104,6 @@ button:hover {
 	background-color: #fff;
 }
 
-.drop-down-option {}
-
 .drop-down-option:hover {
 	background-color: aquamarine;
 }
@@ -130,4 +128,19 @@ button:hover {
 
 .disabled {
 	background-color: rgba(119, 155, 141, 0.296) !important;
+}
+
+.admin-container th,
+.admin-container td {
+	width: 15vw;
+	text-align: center;
+}
+
+.admin-container th {
+	font-size: large;
+	background-color: aquamarine;
+}
+
+tr:nth-child(odd) {
+	background-color: #dddddd;
 }

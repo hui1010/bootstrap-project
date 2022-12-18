@@ -12,7 +12,6 @@ export const AdminView = () => {
         setRentedCars(json);
     }
 
-
     useEffect(
         () => {
             getAllRentedCars()
@@ -20,23 +19,45 @@ export const AdminView = () => {
     )
 
     return (
-        <div >
+        <div className="admin-container">
             <NavBar />
-            <p>Rented Cars</p>
-            <ul>
-                {
-                    rentedCars.length > 0 && rentedCars.map(c => (
-                        <li key={c.id} >{
-                            c.renterName + " " + c.carModel + " " + c.startDate + " - " + c.endDate + " " + c.cost
-                        }</li>
-                    ))
-                }
-            </ul>
-            <p>Total cost</p>
+            {
+                rentedCars.length > 0 ?
+                    <>
+                        <h2>Rented Cars overview</h2>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Model</th>
+                                    <th>From</th>
+                                    <th>To</th>
+                                    <th>Cost</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {
+                                    rentedCars.map((r, index) => (
+                                        <tr key={index}>
+                                            <td>{r.renterName}</td>
+                                            <td>{r.carModel}</td>
+                                            <td>{r.startDate}</td>
+                                            <td>{r.endDate}</td>
+                                            <td>{r.cost}</td>
+                                        </tr>
+                                    ))
+                                }
+                            </tbody>
+                        </table>
+                        <p>Total cost <b>{rentedCars.map(r => r.cost).reduce((x, y) => (x + y))}</b> kr</p>
 
-            <p>{
-                rentedCars.length > 0 ? rentedCars.map(r => r.cost).reduce((x, y) => (x + y)) : 0
-            }</p>
+                    </>
+                    :
+                    <>
+                        <p>No one has rented any cars yet</p>
+                    </>
+            }
+
         </div>
     )
 }
