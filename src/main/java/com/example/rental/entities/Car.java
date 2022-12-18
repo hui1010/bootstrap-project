@@ -13,7 +13,7 @@ public class Car {
             sequenceName = "car_sequence",
             allocationSize = 1
     )
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "car_sequence")
+    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "car_sequence")
     private Integer id;
 
     @Column(nullable = false)

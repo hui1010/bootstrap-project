@@ -31,7 +31,9 @@ export const AdminView = () => {
                 {
                     rentedCars.length > 0 && rentedCars.map(c => (
                         <li key={c.id} >{
-                            c.renterName
+                            c.renterName + " " + c.carModel + " " + c.startDate + " - " + c.endDate + " "
+
+
                         }</li>
                     ))
                 }

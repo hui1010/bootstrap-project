@@ -45,6 +45,7 @@ export const RentView = () => {
 
         const rentDays = (new Date(endDate) - new Date(startDate)) / (1000 * 60 * 60 * 24) + 1
 
+
         await fetch('/rent', {
             method: "POST",
             headers: {
@@ -65,8 +66,6 @@ export const RentView = () => {
         setStartDate(new Date())
         setEndDate(new Date())
     }
-
-    console.log(cars)
 
     return (
         <div className="rent-container" onClick={() => { if (showDropdown) setShowDropdown(false) }}>

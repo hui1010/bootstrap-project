@@ -12,7 +12,7 @@ public class RentCar {
             sequenceName = "rent_car_sequence",
             allocationSize = 1
     )
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "rent_car_sequence")
+    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "rent_car_sequence")
     private Integer id;
 
     @Column(nullable = false)

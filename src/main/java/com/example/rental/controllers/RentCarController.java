@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import com.example.rental.entities.RentCar;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/rent")
@@ -24,17 +25,22 @@ public class RentCarController {
         this.carService = carService;
     }
 
-
-
     @PostMapping
-    public RentCar saveRentCar(@RequestBody RentCar rentCar) {
-        return rentCarService.saveRentCar(rentCar);
-    }
+    public  Optional<RentCar> saveRentCar(@RequestBody RentCar rentCar) {
+/*
+        System.out.println(rentCar);
+        System.out.println(rentCar.getCarModel());
+        Optional<RentCar> found = rentCarService.getRentCarByModel(rentCar.getCarModel());
 
+        if(found.isPresent() && found.get().getEndDate().isBefore(rentCar.getStartDate()) ) {
+            throw new Error("This car is already rented");
+        }
+
+ */
+        return  rentCarService.saveRentCar(rentCar) ;
+    }
 
     @GetMapping
-    public List<Car> getAllCars() {
-        return carService.getAllCars();
-    }
+    public List<Car> getAllCars() {return carService.getAllCars();}
 
 }
