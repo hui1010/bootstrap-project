@@ -21,6 +21,9 @@ public class Car {
     @Column(nullable = false)
     Integer price;
 
+    public Car() {
+    }
+
     public Car(Integer id, String modal, Integer price) {
         this.id = id;
         this.modal = modal;
