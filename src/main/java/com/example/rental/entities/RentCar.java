@@ -1,26 +1,25 @@
 package com.example.rental.entities;
 
+import javax.persistence.*;
 import java.time.LocalDate;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
 
 @Entity
 @Table(name = "rentCar")
 public class RentCar {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    @SequenceGenerator(
+            name = "rent_car_sequence",
+            sequenceName = "rent_car_sequence",
+            allocationSize = 1
+    )
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "rent_car_sequence")
+    private Integer id;
 
     @Column(nullable = false)
     String renterName;
 
     @Column(nullable = false)
-    int renterAge;
+    Integer renterAge;
 
     @Column(nullable = false)
     String carModel;
@@ -31,7 +30,10 @@ public class RentCar {
     @Column(nullable = false)
     LocalDate endDate;
 
-    public RentCar(String renterName, int renterAge, String carModel, LocalDate startDate, LocalDate endDate) {
+    public RentCar() {
+    }
+
+    public RentCar(String renterName, Integer renterAge, String carModel, LocalDate startDate, LocalDate endDate) {
         this.renterName = renterName;
         this.renterAge = renterAge;
         this.carModel = carModel;
@@ -39,8 +41,17 @@ public class RentCar {
         this.endDate = endDate;
     }
 
-    public RentCar() {
+    public RentCar(Integer id, String renterName, Integer renterAge, String carModel, LocalDate startDate, LocalDate endDate) {
+        this.id = id;
+        this.renterName = renterName;
+        this.renterAge = renterAge;
+        this.carModel = carModel;
+        this.startDate = startDate;
+        this.endDate = endDate;
+    }
 
+    public Integer getId() {
+        return id;
     }
 
     public String getRenterName() {
@@ -51,11 +62,11 @@ public class RentCar {
         this.renterName = renterName;
     }
 
-    public int getRenterAge() {
+    public Integer getRenterAge() {
         return renterAge;
     }
 
-    public void setRenterAge(int renterAge) {
+    public void setRenterAge(Integer renterAge) {
         this.renterAge = renterAge;
     }
 
@@ -81,5 +92,17 @@ public class RentCar {
 
     public void setEndDate(LocalDate endDate) {
         this.endDate = endDate;
+    }
+
+    @Override
+    public String toString() {
+        return "RentCar{" +
+                "id=" + id +
+                ", renterName='" + renterName + '\'' +
+                ", renterAge=" + renterAge +
+                ", carModel='" + carModel + '\'' +
+                ", startDate=" + startDate +
+                ", endDate=" + endDate +
+                '}';
     }
 }

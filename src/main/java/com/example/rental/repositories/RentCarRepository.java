@@ -4,9 +4,16 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import com.example.rental.entities.RentCar;
+import org.springframework.stereotype.Repository;
 
-public interface RentCarRepository extends JpaRepository<RentCar, Long> {
+import java.util.List;
 
-    @Query(value = "INSERT INTO rent_car ( renterName, renterAge, carModel, startDate, endDate) VALUES (?1, ?2, ?3, ?4, ?5)", nativeQuery = true)
+@Repository
+public interface RentCarRepository extends JpaRepository<RentCar, Integer> {
+
+    @Query(value = "INSERT INTO public.rent_car ( renter_name, renter_age, car_model, start_date, end_date) VALUES (?1, ?2, ?3, ?4, ?5);", nativeQuery = true)
     RentCar saveRentCar(RentCar rentCar);
+
+    @Query(value = "SELECT * FROM public.rent_car;", nativeQuery = true)
+    List<RentCar> getAllRentCars();
 }

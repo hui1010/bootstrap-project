@@ -54,9 +54,6 @@ export const RentView = () => {
             body: JSON.stringify(data)
         }).then((res) => {
             setSummary(`Hi ${name}, the cost for you to rent ${selectedCar.model} from ${startDate} to ${endDate} is ${selectedCar.price * rentDays} kr`)
-            console.log("sent")
-            console.log(res)
-            console.log('-------------------------------------------f')
 
         })
             .catch(e => console.error(e))
