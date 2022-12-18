@@ -35,23 +35,4 @@ class RentalApplicationTests {
 				.andExpect(content().string(containsString("Hello world!")));
 	}
 
-	/*@Test
-	void shouldInsertOneRowToDatabase() throws Exception {
-		RentCar rentCar = new RentCar("Bowser", 28, "Volv", LocalDate.of(2023, 12, 12), LocalDate.of(2023, 12, 24));
-		this.mvc.perform(post("/rent", rentCar))
-				.andDo(print())
-				.andExpect(status().isOk());
-
-	}*/
-
-	@Test
-	void shouldShowAllDataInDatabase() throws Exception {
-		RentCar rentCar1 = new RentCar("Huiyi", 28, "Volv", LocalDate.of(2023, 12, 12), LocalDate.of(2023, 12, 24));
-		RentCar rentCar2 = new RentCar("Bowser", 28, "Volv", LocalDate.of(2023, 12, 12), LocalDate.of(2023, 12, 24));
-		RentCar rentCar3 = new RentCar("Tuskar", 28, "Volv", LocalDate.of(2023, 12, 12), LocalDate.of(2023, 12, 24));
-		this.mvc.perform(get("/admin"))
-				.andDo(print())
-				.andExpect(status().isOk());
-
-	}
 }
