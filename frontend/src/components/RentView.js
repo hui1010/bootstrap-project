@@ -62,16 +62,16 @@ export const RentView = () => {
             return
         }
 
+        const rentDays = (new Date(endDate) - new Date(startDate)) / (1000 * 60 * 60 * 24) + 1
+
         let data = {
             renterName: name,
             renterAge: age,
             carModel: selectedCar.model,
             startDate: new Date(startDate),
-            endDate: new Date(endDate)
+            endDate: new Date(endDate),
+            cost: selectedCar.price * rentDays
         }
-
-        const rentDays = (new Date(endDate) - new Date(startDate)) / (1000 * 60 * 60 * 24) + 1
-
 
         await fetch('/rent', {
             method: "POST",

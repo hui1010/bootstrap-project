@@ -36,7 +36,7 @@ class RentCarServiceTest {
     }
     @Test
     void itCanSaveRentCar() {
-        RentCar rentCar = new RentCar("Huiyi", 25, "Ford Transit", LocalDate.of(2023,11,19), LocalDate.of(2023, 12,30));
+        RentCar rentCar = new RentCar("Huiyi", 25, "Ford Transit", LocalDate.of(2023,11,19), LocalDate.of(2023, 12,30), 3000);
         underTest.saveRentCar(rentCar);
         ArgumentCaptor<RentCar> rentCarArgumentCaptor = ArgumentCaptor.forClass(RentCar.class);
         verify(rentCarRepository).save(rentCarArgumentCaptor.capture());

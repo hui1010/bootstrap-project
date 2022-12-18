@@ -18,8 +18,8 @@ import static org.junit.jupiter.api.Assertions.*;
 class RentCarRepositoryTest {
     @Autowired
     private RentCarRepository underTest;
-    RentCar rentCar1 = new RentCar("Huiyi", 25, "Ford Transit", LocalDate.of(2023,10,19), LocalDate.of(2023, 12,30));
-    RentCar rentCar2 = new RentCar("Niklas", 25, "Ford Mustang", LocalDate.of(2023,10,19), LocalDate.of(2023, 10,30));
+    RentCar rentCar1 = new RentCar("Huiyi", 25, "Ford Transit", LocalDate.of(2023,10,19), LocalDate.of(2023, 12,30), 3000);
+    RentCar rentCar2 = new RentCar("Niklas", 25, "Ford Mustang", LocalDate.of(2023,10,19), LocalDate.of(2023, 10,30), 3000);
 
     @BeforeEach
     void setUp() {

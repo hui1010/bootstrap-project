@@ -2,6 +2,7 @@ package com.example.rental.entities;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.Objects;
 
 @Entity
 @Table(name = "rentCar")
@@ -30,24 +31,30 @@ public class RentCar {
     @Column(nullable = false)
     LocalDate endDate;
 
+    @Column(nullable = false)
+    Integer cost;
+
     public RentCar() {
     }
 
-    public RentCar(String renterName, Integer renterAge, String carModel, LocalDate startDate, LocalDate endDate) {
-        this.renterName = renterName;
-        this.renterAge = renterAge;
-        this.carModel = carModel;
-        this.startDate = startDate;
-        this.endDate = endDate;
-    }
 
-    public RentCar(Integer id, String renterName, Integer renterAge, String carModel, LocalDate startDate, LocalDate endDate) {
+    public RentCar(Integer id, String renterName, Integer renterAge, String carModel, LocalDate startDate, LocalDate endDate, Integer cost) {
         this.id = id;
         this.renterName = renterName;
         this.renterAge = renterAge;
         this.carModel = carModel;
         this.startDate = startDate;
         this.endDate = endDate;
+        this.cost = cost;
+    }
+
+    public RentCar(String renterName, Integer renterAge, String carModel, LocalDate startDate, LocalDate endDate, Integer cost) {
+        this.renterName = renterName;
+        this.renterAge = renterAge;
+        this.carModel = carModel;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.cost = cost;
     }
 
     public Integer getId() {
@@ -94,6 +101,26 @@ public class RentCar {
         this.endDate = endDate;
     }
 
+    public Integer getCost() {
+        return cost;
+    }
+
+    public void setCost(Integer cost) {
+        this.cost = cost;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof RentCar rentCar)) return false;
+        return getId().equals(rentCar.getId()) && getRenterName().equals(rentCar.getRenterName()) && getRenterAge().equals(rentCar.getRenterAge()) && getCarModel().equals(rentCar.getCarModel()) && getStartDate().equals(rentCar.getStartDate()) && getEndDate().equals(rentCar.getEndDate()) && getCost().equals(rentCar.getCost());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId(), getRenterName(), getRenterAge(), getCarModel(), getStartDate(), getEndDate(), getCost());
+    }
+
     @Override
     public String toString() {
         return "RentCar{" +
@@ -103,6 +130,7 @@ public class RentCar {
                 ", carModel='" + carModel + '\'' +
                 ", startDate=" + startDate +
                 ", endDate=" + endDate +
+                ", cost=" + cost +
                 '}';
     }
 }
