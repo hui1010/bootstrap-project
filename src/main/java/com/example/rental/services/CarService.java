@@ -17,7 +17,10 @@ public class CarService {
         this.carRepository = carRepository;
     }
 
+
     public List<Car> getAllCars() {
+        // Besides using my own query, this should get the work down as well
+        // return carRepository.findAll();
         return carRepository.getAllCars();
     }
 }
